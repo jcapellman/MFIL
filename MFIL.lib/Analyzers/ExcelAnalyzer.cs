@@ -10,10 +10,8 @@ using MFIL.lib.Analyzers.Base;
 
 namespace MFIL.lib.Analyzers
 {
-    public class ExcelAnalyzer : BaseAnalyzer
+    public class ExcelAnalyzer : BaseOpenXMLAnalyzer
     {
-        private Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
-
         private static List<string> ParsePart<T>(SpreadsheetDocument document) where T : OpenXmlPart
         {
             var parts = new List<T>();
@@ -101,8 +99,8 @@ namespace MFIL.lib.Analyzers
         private void AddResult<T>(SpreadsheetDocument document, string name) where T: OpenXmlPart
         {
             var result = ParsePart<T>(document);
-            
-            results.Add(name, result);
+
+            AddAnalysis(name, result);
         }
 
         public override Dictionary<string, List<string>> Analyze(Stream fileStream)
@@ -122,14 +120,14 @@ namespace MFIL.lib.Analyzers
                 
                 var urls = GetUrls(spreadsheet);
 
-                results.Add("Cell URLS", urls);
+                AddAnalysis("Cell URLS", urls);
             }
             catch (OpenXmlPackageException)
             {
-                results.Add("Error", new List<string> { "File is not a Modern Excel Document"});
+                AddAnalysis("Error", new List<string> { "File is not a Modern Excel Document"});
             }
 
-            return results;
+            return GetAnalysis();
         }
     }
 }
