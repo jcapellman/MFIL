@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MFIL.lib", "MFIL.lib\MFIL.l
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MFIL.app", "MFIL.app\MFIL.app.csproj", "{C999E758-6111-43F5-B062-FE3D01940258}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MFIL.tests", "MFIL.tests\MFIL.tests.csproj", "{0BF5696B-ED4B-4E15-B904-C21109C58B8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C999E758-6111-43F5-B062-FE3D01940258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C999E758-6111-43F5-B062-FE3D01940258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C999E758-6111-43F5-B062-FE3D01940258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF5696B-ED4B-4E15-B904-C21109C58B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF5696B-ED4B-4E15-B904-C21109C58B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF5696B-ED4B-4E15-B904-C21109C58B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF5696B-ED4B-4E15-B904-C21109C58B8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
