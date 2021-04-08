@@ -20,6 +20,17 @@ namespace MFIL.tests
         }
 
         [TestMethod]
+        public void MFILAnalyzer_NotValidArgument()
+        {
+            var motra = new MFILAnalyzer();
+
+            var result = motra.Analyze(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "explorer.exe"));
+
+            Assert.IsFalse(result.Scannable);
+            Assert.IsNull(result.FileType);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void MFILAnalyzer_InvalidFileArgument()
         {
