@@ -15,7 +15,8 @@ namespace MFIL.lib
         public MFILAnalyzer()
         {
             _analyzers = typeof(MFILAnalyzer).Assembly.GetTypes()
-                .Where(a => a.BaseType == typeof(BaseAnalyzer) && !a.IsAbstract)
+                .Where(a => (a.BaseType == typeof(BaseAnalyzer) || a.BaseType == typeof(BaseOpenXMLAnalyzer)) 
+                    && !a.IsAbstract)
                 .Select(b => (BaseAnalyzer) Activator.CreateInstance(b)).ToList();
         }
 
@@ -44,14 +45,16 @@ namespace MFIL.lib
             {
                 try
                 {
+                    container.Analysis = analyzer.Analyze(stream);
+
                     container.Scannable = true;
                     container.FileType = analyzer.Name;
-                    container.Analysis = analyzer.Analyze(stream);
 
                     break;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    var t = ex;
                     // Assume it just wasn't the proper type
                 }
             }
