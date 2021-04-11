@@ -12,16 +12,9 @@ namespace MFIL.lib.Analyzers
     {
         public override string Name => "OpenXML Word";
 
-        private static List<string> ParsePart<T>(WordprocessingDocument document) where T : OpenXmlPart => 
+        protected override List<string> ParsePart<T>(OpenXmlPackage document)  => 
             document.GetPartsOfType<T>().Select(a => a.Uri.ToString()).ToList();
-
-        private void AddResult<T>(WordprocessingDocument document, string name) where T : OpenXmlPart
-        {
-            var result = ParsePart<T>(document);
-
-            AddAnalysis(name, result);
-        }
-
+        
         public override Dictionary<string, List<string>> Analyze(Stream fileStream)
         {
             try

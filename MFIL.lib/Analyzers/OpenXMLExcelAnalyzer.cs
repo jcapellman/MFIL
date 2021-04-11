@@ -12,11 +12,18 @@ namespace MFIL.lib.Analyzers
 {
     public class OpenXMLExcelAnalyzer : BaseOpenXMLAnalyzer
     {
-        private static List<string> ParsePart<T>(SpreadsheetDocument document) where T : OpenXmlPart
+        protected override List<string> ParsePart<T>(OpenXmlPackage document)
         {
             var parts = new List<T>();
-        
-            foreach (var worksheet in document.WorkbookPart.WorksheetParts)
+
+            var workbookPartWorksheetParts = (document as SpreadsheetDocument)?.WorkbookPart.WorksheetParts;
+
+            if (workbookPartWorksheetParts == null)
+            {
+                return parts.Select(a => a.Uri.ToString()).ToList();
+            }
+
+            foreach (var worksheet in workbookPartWorksheetParts)
             {
                 var sheetParts = worksheet?.GetPartsOfType<T>().ToList();
 
@@ -25,7 +32,7 @@ namespace MFIL.lib.Analyzers
                     parts.AddRange(sheetParts);
                 }
             }
-            
+
             return parts.Select(a => a.Uri.ToString()).ToList();
         }
 
@@ -95,14 +102,7 @@ namespace MFIL.lib.Analyzers
 
             return urls;
         }
-
-        private void AddResult<T>(SpreadsheetDocument document, string name) where T: OpenXmlPart
-        {
-            var result = ParsePart<T>(document);
-
-            AddAnalysis(name, result);
-        }
-
+        
         public override Dictionary<string, List<string>> Analyze(Stream fileStream)
         {
             try
