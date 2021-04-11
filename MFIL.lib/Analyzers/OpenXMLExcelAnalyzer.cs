@@ -10,7 +10,7 @@ using MFIL.lib.Analyzers.Base;
 
 namespace MFIL.lib.Analyzers
 {
-    public class ExcelAnalyzer : BaseOpenXMLAnalyzer
+    public class OpenXMLExcelAnalyzer : BaseOpenXMLAnalyzer
     {
         private static List<string> ParsePart<T>(SpreadsheetDocument document) where T : OpenXmlPart
         {
@@ -47,7 +47,7 @@ namespace MFIL.lib.Analyzers
             return urls;
         }
 
-        public override string Name => "Excel";
+        public override string Name => "OpenXML Excel";
 
         protected override List<string> GetUrls(OpenXmlPackage package)
         {
