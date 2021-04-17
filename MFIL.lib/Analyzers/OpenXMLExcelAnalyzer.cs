@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -34,24 +33,6 @@ namespace MFIL.lib.Analyzers
             }
 
             return parts.Select(a => a.Uri.ToString()).ToList();
-        }
-
-        protected static List<string> GetURLsFromString(string str)
-        {
-            var urls = new List<string>();
-
-            var pattern = @"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$";
-            
-            var regEx = new Regex(pattern, RegexOptions.IgnoreCase);
-
-            var matches = regEx.Matches(str);
-
-            foreach (Match match in matches)
-            {
-                urls.Add(match.Value);
-            }
-
-            return urls;
         }
 
         public override string Name => "OpenXML Excel";
