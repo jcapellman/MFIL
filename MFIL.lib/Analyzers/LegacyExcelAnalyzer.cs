@@ -6,6 +6,8 @@ using System.Linq;
 using MFIL.lib.Analyzers.Base;
 
 using NPOI.HSSF.UserModel;
+using NPOI.POIFS.FileSystem;
+using NPOI.POIFS.Macros;
 
 namespace MFIL.lib.Analyzers
 {
@@ -35,6 +37,17 @@ namespace MFIL.lib.Analyzers
             return urls;
         }
 
+        private static List<string> ExtractMacros(Stream fileStream)
+        {
+            var reader = new VBAMacroReader(new NPOIFSFileSystem(fileStream));
+
+            var macros = reader.ReadMacros();
+            
+            reader.Close();
+
+            return macros.Values.ToList();
+        }
+
         public override Dictionary<string, List<string>> Analyze(Stream fileStream)
         {
             try
@@ -42,6 +55,8 @@ namespace MFIL.lib.Analyzers
                 var workbook = new HSSFWorkbook(fileStream);
 
                 AddAnalysis("Sheets", GetUrls(workbook));
+
+                AddAnalysis("Macros", ExtractMacros(fileStream));
             }
             catch (Exception)
             {
