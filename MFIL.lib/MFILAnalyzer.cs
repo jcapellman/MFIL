@@ -5,6 +5,7 @@ using System.Linq;
 
 using MFIL.lib.Analyzers.Base;
 using MFIL.lib.Container;
+using MFIL.lib.Exceptions;
 
 namespace MFIL.lib
 {
@@ -52,10 +53,13 @@ namespace MFIL.lib
 
                     break;
                 }
+                catch (InvalidFileException ife)
+                {
+                    // TODO: log ife
+                }
                 catch (Exception ex)
                 {
-                    var t = ex;
-                    // Assume it just wasn't the proper type
+                    // TODO: log ex
                 }
             }
 

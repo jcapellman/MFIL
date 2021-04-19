@@ -5,6 +5,7 @@ using System.Linq;
 using DocumentFormat.OpenXml.Packaging;
 
 using MFIL.lib.Analyzers.Base;
+using MFIL.lib.Exceptions;
 
 namespace MFIL.lib.Analyzers
 {
@@ -25,7 +26,7 @@ namespace MFIL.lib.Analyzers
             }
             catch (OpenXmlPackageException)
             {
-                AddAnalysis("Error", new List<string> { "File is not an OpenXML Word Document" });
+                throw new InvalidFileException($"File is not a {Name}");
             }
 
             return GetAnalysis();

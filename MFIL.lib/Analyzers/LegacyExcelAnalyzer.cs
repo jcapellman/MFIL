@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using MFIL.lib.Analyzers.Base;
+using MFIL.lib.Exceptions;
 
 using NPOI.HSSF.UserModel;
 using NPOI.POIFS.FileSystem;
@@ -60,7 +61,7 @@ namespace MFIL.lib.Analyzers
             }
             catch (Exception)
             {
-                AddAnalysis("Error", new List<string> { $"File is not a {Name} Document" });
+                throw new InvalidFileException($"File is not a {Name}");
             }
 
             return GetAnalysis();
