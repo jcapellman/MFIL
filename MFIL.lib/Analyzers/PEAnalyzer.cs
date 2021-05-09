@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using MFIL.lib.Analyzers.Base;
 using MFIL.lib.Exceptions;
@@ -16,6 +17,10 @@ namespace MFIL.lib.Analyzers
             try
             {
                 var file = new PeNet.PeFile(fileStream);
+
+                AddAnalysis("DLLImports", file.ImportedFunctions?.Select(a => a.DLL).ToList());
+
+                AddAnalysis("ImportedFunctions", file.ImportedFunctions?.Select(a => a.Name).ToList());
             }
             catch (OutOfMemoryException)
             {

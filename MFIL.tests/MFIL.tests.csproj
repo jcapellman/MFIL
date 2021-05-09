@@ -20,4 +20,10 @@
     <ProjectReference Include="..\MFIL.lib\MFIL.lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="7c6665aaba3b7da391ca8a6dd152bd32fafbad88">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

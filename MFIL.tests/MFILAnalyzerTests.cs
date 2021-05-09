@@ -38,5 +38,13 @@ namespace MFIL.tests
 
             motra.Analyze("wick");
         }
+
+        [TestMethod]
+        public void MFILAnalyzer_ELFArgument()
+        {
+            var motra = new MFILAnalyzer();
+
+            motra.Analyze("7c6665aaba3b7da391ca8a6dd152bd32fafbad88");
+        }
     }
 }
