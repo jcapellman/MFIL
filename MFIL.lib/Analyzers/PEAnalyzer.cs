@@ -21,6 +21,8 @@ namespace MFIL.lib.Analyzers
                 AddAnalysis("DLLImports", file.ImportedFunctions?.Select(a => a.DLL).ToList());
 
                 AddAnalysis("ImportedFunctions", file.ImportedFunctions?.Select(a => a.Name).ToList());
+
+                AddAnalysis("ExportedFunctions", file.ExportedFunctions?.Select(a => a.Name).ToList());
             }
             catch (OutOfMemoryException)
             {
