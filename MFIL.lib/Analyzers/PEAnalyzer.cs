@@ -12,6 +12,8 @@ namespace MFIL.lib.Analyzers
     {
         public override string Name => "PE";
 
+        private string[] RansomwareFunctions = { "VirtualProtect", "TerminateProcess" };
+
         public override Dictionary<string, List<string>> Analyze(Stream fileStream)
         {
             try
@@ -21,6 +23,8 @@ namespace MFIL.lib.Analyzers
                 AddAnalysis("DLLImports", file.ImportedFunctions?.Select(a => a.DLL).ToList());
 
                 AddAnalysis("ImportedFunctions", file.ImportedFunctions?.Select(a => a.Name).ToList());
+
+                AddAnalysis("RansomwareFunctions", file.ImportedFunctions?.Where(a => RansomwareFunctions.Contains(a.Name)).Select(b => b.Name).ToList());
 
                 AddAnalysis("ExportedFunctions", file.ExportedFunctions?.Select(a => a.Name).ToList());
 
