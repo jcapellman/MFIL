@@ -29,6 +29,8 @@ namespace MFIL.lib.Analyzers
                 AddAnalysis("ExportedFunctions", file.ExportedFunctions?.Select(a => a.Name).ToList());
 
                 AddAnalysis("SectionHeaders", file.ImageSectionHeaders?.Select(a => a.Name).ToList());
+
+                AddAnalysis("ImageSectionHeaders", file.ImageSectionHeaders?.Select(a => a.Name).ToList());
             }
             catch (OutOfMemoryException)
             {
