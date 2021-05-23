@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using MFIL.lib;
+using MFIL.lib.Analyzers;
 
 namespace MFIL.tests
 {
@@ -24,10 +25,11 @@ namespace MFIL.tests
         {
             var motra = new MFILAnalyzer();
 
-            var result = motra.Analyze(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "explorer.exe"));
+            var result = motra.Analyze(Path.Combine(AppContext.BaseDirectory, "PESample.exe"));
 
-            Assert.IsFalse(result.Scannable);
-            Assert.IsNull(result.FileType);
+            Assert.IsTrue(result.Scannable);
+            Assert.IsNotNull(result.FileType);
+            Assert.AreEqual(new PEAnalyzer().Name, result.FileType);
         }
 
         [TestMethod]

@@ -33,7 +33,7 @@ namespace MFIL.lib
                 throw new FileNotFoundException($"File {fileName} was not found");
             }
 
-            using var stream = File.OpenRead(fileName);
+            var stream = File.OpenRead(fileName);
 
             var container = new AnalysisContainer
             {
@@ -46,6 +46,15 @@ namespace MFIL.lib
             {
                 try
                 {
+                    if (!stream.CanRead)
+                    {
+                        stream = File.OpenRead(fileName);
+                    }
+                    else
+                    {
+                        stream.Seek(0, SeekOrigin.Begin);
+                    }
+                    
                     container.Analysis = analyzer.Analyze(stream);
 
                     container.Scannable = true;
@@ -62,6 +71,8 @@ namespace MFIL.lib
                     // TODO: log ex
                 }
             }
+
+            stream.Close();
 
             return container;
         }

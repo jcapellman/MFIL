@@ -5,6 +5,8 @@ using System.IO;
 using MFIL.lib.Analyzers.Base;
 using MFIL.lib.Exceptions;
 
+using PdfSharp.Pdf.IO;
+
 namespace MFIL.lib.Analyzers
 {
     public class PDFAnalyzer : BaseAnalyzer
@@ -15,9 +17,14 @@ namespace MFIL.lib.Analyzers
         {
             try
             {
-                var file = new PdfSharp.Pdf.PdfDocument(fileStream);
+                var file = PdfReader.Open(fileStream, PdfDocumentOpenMode.ReadOnly);
+
+                if (file == null)
+                {
+                    throw new InvalidFileException($"File is not a {Name}");
+;               }
             }
-            catch (OutOfMemoryException)
+            catch (Exception)
             {
                 throw new InvalidFileException($"File is not a {Name}");
             }

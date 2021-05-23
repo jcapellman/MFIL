@@ -24,6 +24,9 @@
     <None Update="7c6665aaba3b7da391ca8a6dd152bd32fafbad88">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="PESample.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

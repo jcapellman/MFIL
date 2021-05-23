@@ -14,9 +14,19 @@ namespace MFIL.lib.Analyzers
         {
             try
             {
-                // TODO: Call get-command and check that at least one match is found
+                for (var nPosition = 0; nPosition < fileStream.Length; nPosition++)
+                {
+                    var a = fileStream.ReadByte();
+
+                    if (a is not (>= 0 and <= 127))
+                    {
+                        throw new InvalidFileException($"Not a {Name} file");
+                    }
+                }
+
+                // TODO: Reasonably certain it is a text file do FE
             }
-            catch (InvalidFileException ife)
+            catch (InvalidFileException)
             {
                 throw new InvalidFileException($"File is not a {Name}");
             }

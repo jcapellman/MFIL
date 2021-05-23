@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
+using Aspose.Words.Loading;
 using MFIL.lib.Analyzers.Base;
 using MFIL.lib.Exceptions;
 

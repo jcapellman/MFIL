@@ -36,7 +36,7 @@ namespace MFIL.lib.Analyzers
 
                 AddAnalysis("ImageSectionHeaders", file.ImageSectionHeaders?.Select(a => a.Name).ToList());
             }
-            catch (OutOfMemoryException)
+            catch (Exception)
             {
                 throw new InvalidFileException($"File is not a {Name}");
             }
